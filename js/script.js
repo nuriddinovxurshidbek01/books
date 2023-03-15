@@ -3,6 +3,7 @@ let wrapper = document.querySelector(".wrapper");
 let elForm = document.querySelector(".form");
 let elSelect = document.querySelector(".selektSort")
 let elSearch = document.querySelector(".searchInfo");
+let elAuthor = document.querySelector(".author");
 
 renderUi(books)
 
@@ -33,54 +34,65 @@ function renderUi(array) {
 }
 
 function sort() {
-    let sortBooks = [];
+    let sortLanguage = [];
     books.forEach(item => {
-        if (!sortBooks.includes(item.language)) {
-            sortBooks.push(item.language);
+        if (!sortLanguage.includes(item.language)) {
+            sortLanguage.push(item.language);
         }
     })
 
-    if (sortBooks) {
-        sortBooks.forEach(item => {
+    if (sortLanguage) {
+        sortLanguage.forEach(item => {
             const newOption = document.createElement('option');
             newOption.textContent = item;
             elSelect.append(newOption);
         })
     }
+    let sortAuthor = [];
+    books.forEach(item => {
+        if (!sortAuthor.includes(item.author)) {
+            sortAuthor.push(item.author);
+        }
+    })
+
+    if (sortAuthor) {
+        sortAuthor.forEach(item => {
+            const newAuthor = document.createElement('option');
+            newAuthor.textContent = item;
+            elAuthor.append(newAuthor);
+        })
+    }
 
 }
-
 sort();
 
 
 elSelect.addEventListener('change', function(evt) {
     evt.preventDefault();
-
+    let value = evt.target.value;
     wrapper.innerHTML = "";
 
-    let value = evt.target.value;
     if (value == "all") {
-        search(books);
         renderUi(books);
+        search(books);
     } else {
         const selectValue = books.filter(item => {
-            return value === item.language;
+            return value == item.language;
         });
-        console.log(selectValue);
         renderUi(selectValue);
+        search(selectValue);
     }
 
 
 });
 
 function search(array) {
-    elSearch.addEventListener('keyup', function(evt) {
+    elSearch.addEventListener('keyup', (evt) => {
 
         evt.preventDefault();
-
+        let value = evt.target.value;
         wrapper.innerHTML = "";
 
-        let value = evt.target.value;
         const newItem = array.filter(item => {
             return item.title.includes(value);
         })
