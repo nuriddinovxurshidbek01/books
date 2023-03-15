@@ -40,9 +40,35 @@ body {
 
 .sort {
     overflow: hidden;
+    display: inline;
+}
+
+.btn {
+    padding: 5px 10px;
+    background-color: blue;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+}
+
+.sortAll {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.author {
+    padding: 7px 15px;
+    background-color: #fff;
+    margin-right: 15px;
+    border-radius: 7px;
 }
 
 .selektSort {
+    width: 80px;
     padding: 7px 10px;
     background-color: #fff;
     margin-right: 15px;
@@ -57,6 +83,7 @@ body {
 }
 
 .btnHeader {
+    width: 80px;
     padding: 5px 20px;
     background-color: blue;
     border: none;
@@ -138,7 +165,7 @@ body {
     font-size: 21px;
     font-weight: 700;
     padding: 8px;
-    height: 50px;
+    height: 70px;
 }
 
 .infoBook {
