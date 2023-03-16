@@ -48,6 +48,7 @@ function sort() {
             elSelect.append(newOption);
         })
     }
+
     let sortAuthor = [];
     books.forEach(item => {
         if (!sortAuthor.includes(item.author)) {
@@ -85,6 +86,31 @@ elSelect.addEventListener('change', function(evt) {
 
 
 });
+
+elAuthor.addEventListener('change', function(evt) {
+    evt.preventDefault();
+
+    let value = evt.target.value;
+
+    wrapper.innerHTML = "";
+
+    if (value == "author") {
+        renderUi(books);
+    } else {
+        let slectAuthers = books.filter(item => {
+            return value == item.author
+        })
+        renderUi(slectAuthers);
+    }
+
+
+})
+
+
+
+
+
+
 
 function search(array) {
     elSearch.addEventListener('keyup', (evt) => {
