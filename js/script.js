@@ -4,6 +4,7 @@ let elForm = document.querySelector(".form");
 let elSelect = document.querySelector(".selektSort")
 let elSearch = document.querySelector(".searchInfo");
 let elAuthor = document.querySelector(".author");
+let elSelect2 = document.querySelector(".selektAlphobit")
 
 renderUi(books)
 
@@ -87,25 +88,83 @@ elSelect.addEventListener('change', function(evt) {
 
 });
 
-elAuthor.addEventListener('change', function(evt) {
-    evt.preventDefault();
-
-    let value = evt.target.value;
-
-    wrapper.innerHTML = "";
-
+elAuthor.addEventListener('change', (itm) => {
+    itm.preventDefault();
+    let value = itm.target.value;
+    wrapper.innerHTML = " ";
     if (value == "author") {
         renderUi(books);
+        search(books)
     } else {
-        let slectAuthers = books.filter(item => {
-            return value == item.author
+        let selectAuters = books.filter(item => {
+            return value == item.author;
         })
-        renderUi(slectAuthers);
-    }
+        renderUi(selectAuters);
+        search(selectAuters);
 
+    }
 
 })
 
+elSelect2.addEventListener('change', (evt) => {
+    wrapper.innerHTML = "";
+    let selectValues = evt.target.value;
+    if (selectValues == "Aa-Zz") {
+        AZ(books);
+    } else if (selectValues == "Zz-Aa") {
+        ZA(books)
+    } else if (selectValues == "pagUp") {
+        pagesUP(books);
+    } else if (selectValues == "pagDown") {
+        pagesDown(books)
+    } else {
+        renderUi(books);
+    }
+})
+
+function AZ(array) {
+    array.sort((a, b) => {
+        if (a.author > b.author) {
+            return 1;
+        }
+        if (a.author < b.author) {
+            return -1;
+        }
+        return 0;
+    })
+    renderUi(array)
+}
+
+function ZA(array) {
+    array.sort((a, b) => {
+        if (a.author < b.author) {
+            return 1;
+        }
+        if (a.author > b.author) {
+            return -1;
+        }
+        return 0;
+    })
+    renderUi(array)
+}
+
+function pagesUP(array) {
+
+    array.sort((a, b) => {
+        array.innerHTML = ""
+        return a.pages - b.pages;
+    })
+    renderUi(array);
+}
+
+function pagesDown(array) {
+
+    array.sort((a, b) => {
+        array.innerHTML = ""
+        return b.pages - a.pages;
+    })
+    renderUi(array);
+}
 
 
 
